@@ -1384,6 +1384,31 @@
                 flex-direction: column;
             }
         }
+
+        /* Toast */
+        #toast {
+            position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%);
+            background: rgba(30,41,59,.95); color:#fff; padding:14px 18px;
+            border:1px solid rgba(255,255,255,.08); border-radius:12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.35);
+            opacity:0; pointer-events:none; transition: opacity .25s, transform .25s;
+            z-index:3000; font-weight:600
+        }
+        #toast.show { opacity:1; transform: translateX(-50%) translateY(-6px); }
+        #toast.success{ border-color: rgba(16,185,129,.5)}
+        #toast.error{ border-color: rgba(239,68,68,.5)}
+
+        /* Field errors */
+        .input-error {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 2px rgba(239,68,68,.2) !important;
+        }
+        .error-text {
+            color: #ef4444;
+            font-size: 0.8rem;
+            margin-top: 6px;
+        }
+
     </style>
 </head>
 <body>
@@ -1415,9 +1440,10 @@
             Experience the perfect balance of rapid development and exceptional quality.
             Premium solutions delivered on time without compromising excellence.
         </p>
-        <button class="premium-btn" onclick="startInTelegram()">
-            <span>Get Started Today</span>
-            <i class="fab fa-telegram"></i>
+
+        <button class="premium-btn" onclick="openContactModal()">
+                        <span>Get Started Today</span>
+                        <i class="fab fa-telegram"></i>
         </button>
 
         <div class="hero-stats">
@@ -1730,22 +1756,22 @@
             <!-- Form Section -->
             <div class="form-section">
                 <h4>Fill Contact Form</h4>
-                <form id="contactForm">
+                <form id="contactForm" novalidate>
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email"  placeholder="Your Name" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone">
+                        <input type="tel" id="phone" name="phone"   placeholder="123-456-7890">
                     </div>
                     <div class="form-group">
                         <label for="project">Project Description</label>
-                        <textarea id="project" name="project" rows="3" required></textarea>
+                        <textarea id="project" name="project" placeholder="Your message"  rows="3" required></textarea>
                     </div>
                     <div class="form-group">
                         <div class="captcha-container">
@@ -1811,227 +1837,22 @@
         <p>&copy; 2025 DeepFlow Labs. All rights reserved.</p>
     </div>
 </footer>
+<div id="toast" role="status" aria-live="polite"></div>
+</body>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CHG03GBEXL"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-CHG03GBEXL');
-</script>
-<script>
-    // Carousel functionality
-    document.addEventListener('DOMContentLoaded', function () {
-        const track = document.getElementById('carouselTrack');
-        const slides = document.querySelectorAll('.carousel-slide');
-        const dotsContainer = document.getElementById('carouselDots');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
+<!-- Разнесённые скрипты -->
+<script defer src="/assets/js/ga.js"></script>
+<script defer src="/assets/js/captcha.js"></script>
+<script defer src="/assets/js/toasts.js"></script>
+<script defer src="/assets/js/overlay.js"></script>
+<script defer src="/assets/js/modal.js"></script>
+<script defer src="/assets/js/carousel.js"></script>
+<script defer src="/assets/js/animations.js"></script>
+<script defer src="/assets/js/cta.js"></script>
+<script defer src="/assets/js/fab-tracking.js"></script>
 
-        let currentIndex = 0;
-        const totalSlides = slides.length;
-        const slidesPerView = 3;
 
-        // Create dots
-        for (let i = 0; i < Math.ceil(totalSlides / slidesPerView); i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('carousel-dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
-        }
-
-        // Update carousel position
-        function updateCarousel() {
-            const slideWidth = slides[0].offsetWidth + 32; // including gap
-            track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-
-            // Update active dot
-            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
-        }
-
-        // Go to specific slide
-        function goToSlide(index) {
-            currentIndex = index;
-            updateCarousel();
-        }
-
-        // Next slide
-        function nextSlide() {
-            const maxIndex = Math.ceil(totalSlides / slidesPerView) - 1;
-            currentIndex = (currentIndex + 1) % (maxIndex + 1);
-            updateCarousel();
-        }
-
-        // Previous slide
-        function prevSlide() {
-            const maxIndex = Math.ceil(totalSlides / slidesPerView) - 1;
-            currentIndex = (currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
-            updateCarousel();
-        }
-
-        // Event listeners
-        prevBtn.addEventListener('click', prevSlide);
-        nextBtn.addEventListener('click', nextSlide);
-
-        // Auto-advance carousel
-        setInterval(nextSlide, 5000);
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-
-                    // For timeline items
-                    if (entry.target.classList.contains('timeline-item')) {
-                        const delay = Array.from(entry.target.parentNode.children).indexOf(entry.target) * 200;
-                        setTimeout(() => {
-                            entry.target.classList.add('visible');
-                        }, delay);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.fade-in, .timeline-item').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', function () {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-    });
-
-    // Telegram functions
-    function startInTelegram() {
-        window.open('https://t.me/mngartur', '_blank');
-    }
-
-    // Modal functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('contactModal');
-        const closeModalBtn = document.querySelector('.close-modal');
-        const contactForm = document.getElementById('contactForm');
-
-        // Initialize CAPTCHA
-        const captcha = initCaptcha();
-
-        // Open modal
-        function openModal() {
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close modal
-        function closeModal() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Event listeners
-        closeModalBtn.addEventListener('click', closeModal);
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                closeModal();
-            }
-        });
-
-        // Form submission
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Validate CAPTCHA
-            const captchaInput = document.getElementById('captchaInput').value;
-            if (!captcha.validate(captchaInput)) {
-                alert('Please enter the correct CAPTCHA code.');
-                captcha.refresh();
-                return;
-            }
-
-            // Get form data
-            const formData = new FormData(contactForm);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                project: formData.get('project')
-            };
-
-            // In a real implementation, you would send this data to your server
-            console.log('Form submitted:', data);
-
-            // Show success message
-            alert('Thank you for your submission! We will contact you soon.');
-
-            // Reset form and close modal
-            contactForm.reset();
-            captcha.refresh();
-            closeModal();
-        });
-
-        // Update the global function
-        window.openContactModal = openModal;
-    });
-
-    // CAPTCHA functionality
-    (function (w) {
-        function generateCaptcha(length = 6) {
-            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-            let captcha = '';
-            for (let i = 0; i < length; i++) {
-                captcha += chars[Math.floor(Math.random() * chars.length)];
-            }
-            return captcha;
-        }
-
-        function initCaptcha() {
-            let currentCaptcha = generateCaptcha();
-            const captchaText = document.getElementById('captchaText');
-            const refreshBtn = document.getElementById('refreshCaptcha');
-            const captchaInput = document.getElementById('captchaInput');
-
-            if (captchaText) captchaText.textContent = currentCaptcha;
-
-            if (refreshBtn) {
-                refreshBtn.addEventListener('click', function () {
-                    currentCaptcha = generateCaptcha();
-                    if (captchaText) captchaText.textContent = currentCaptcha;
-                    if (captchaInput) captchaInput.value = '';
-                });
-            }
-
-            return {
-                getCurrent: () => currentCaptcha,
-                refresh: () => {
-                    currentCaptcha = generateCaptcha();
-                    if (captchaText) captchaText.textContent = currentCaptcha;
-                    if (captchaInput) captchaInput.value = '';
-                },
-                validate: (input) => (input || '').trim().toUpperCase() === currentCaptcha
-            };
-        }
-
-        w.generateCaptcha = generateCaptcha;
-        w.initCaptcha = initCaptcha;
-    })(window);
-</script>
-</body>
 </html>
