@@ -667,11 +667,11 @@
             // Determine target page
             let target = '/';
             if (set.has('fast') && set.has('cheap')) {
-                target = '/exp/fast-cheap.html';
+                target = '/fast-cheap.html';
             } else if (set.has('cheap') && set.has('quality')) {
                 target = '/exp/cheap-quality.html';
             } else if (set.has('fast') && set.has('quality')) {
-                target = '/exp/fast-quality.html';
+                target = 'fast-quality.html';
             } else {
                 return;
             }
@@ -723,7 +723,18 @@
         } else {
             init();
         }
+
+        // Default view
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                resetAll();
+            } else {
+                resetAll();
+            }
+        });
+
     })();
+
 </script>
 </body>
 </html>
