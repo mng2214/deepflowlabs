@@ -4,28 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Development | Fast & Quality - DeepFlow Labs</title>
-    <meta name="description" content="Premium custom software development with perfect balance of speed and quality for SMBs">
+    <meta name="description"
+          content="Premium custom software development with perfect balance of speed and quality for SMBs">
 
     <!-- Preload critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
     <style>
         :root {
-            --bg: #0a0f1c;
+            --bg: #050816;
             --fg: #ffffff;
-            --muted: #a0aec0;
-            --brand: #6366f1;
-            --brand-2: #8b5cf6;
-            --accent: #06d6a0;
-            --card: #1a1f2e;
+            --muted: #94a3b8;
+            --brand: #f59e0b;
+            --brand-2: #ef4444;
+            --accent: #10b981;
+            --card: #111827;
             --radius: 16px;
-            --shadow: 0 10px 30px rgba(0,0,0,0.3);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             --gradient: linear-gradient(135deg, var(--brand), var(--brand-2), var(--accent));
             --gradient-text: linear-gradient(135deg, var(--brand), var(--accent));
-            --light-bg: rgba(255,255,255,0.08);
+            --light-bg: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -42,14 +44,54 @@
             margin: 0;
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             color: var(--fg);
-            background:
-                    radial-gradient(1000px 800px at 20% 10%, rgba(99, 102, 241, 0.15), transparent 50%),
-                    radial-gradient(800px 600px at 80% 90%, rgba(6, 214, 160, 0.12), transparent 50%),
-                    radial-gradient(600px 400px at 40% 70%, rgba(139, 92, 246, 0.1), transparent 50%),
-                    var(--bg);
+            background: radial-gradient(1200px 900px at 20% 10%, rgba(245, 158, 11, 0.2), transparent 50%),
+            radial-gradient(900px 700px at 80% 90%, rgba(239, 68, 68, 0.18), transparent 50%),
+            radial-gradient(700px 500px at 40% 70%, rgba(16, 185, 129, 0.15), transparent 50%),
+            var(--bg);
             line-height: 1.7;
             overflow-x: hidden;
         }
+
+        /* Option */
+        /*:root {*/
+        /*    --bg: #0a0f1c;*/
+        /*    --fg: #ffffff;*/
+        /*    --muted: #a0aec0;*/
+        /*    --brand: #6366f1;*/
+        /*    --brand-2: #8b5cf6;*/
+        /*    --accent: #06d6a0;*/
+        /*    --card: #1a1f2e;*/
+        /*    --radius: 16px;*/
+        /*    --shadow: 0 10px 30px rgba(0,0,0,0.3);*/
+        /*    --gradient: linear-gradient(135deg, var(--brand), var(--brand-2), var(--accent));*/
+        /*    --gradient-text: linear-gradient(135deg, var(--brand), var(--accent));*/
+        /*    --light-bg: rgba(255,255,255,0.08);*/
+        /*}*/
+
+        /** {*/
+        /*    box-sizing: border-box;*/
+        /*    margin: 0;*/
+        /*    padding: 0;*/
+        /*}*/
+
+        /*html {*/
+        /*    scroll-behavior: smooth;*/
+        /*}*/
+
+        /*body {*/
+        /*    margin: 0;*/
+        /*    font-family: 'Inter', system-ui, -apple-system, sans-serif;*/
+        /*    color: var(--fg);*/
+        /*    background:*/
+        /*            radial-gradient(1000px 800px at 20% 10%, rgba(99, 102, 241, 0.15), transparent 50%),*/
+        /*            radial-gradient(800px 600px at 80% 90%, rgba(6, 214, 160, 0.12), transparent 50%),*/
+        /*            radial-gradient(600px 400px at 40% 70%, rgba(139, 92, 246, 0.1), transparent 50%),*/
+        /*            var(--bg);*/
+        /*    line-height: 1.7;*/
+        /*    overflow-x: hidden;*/
+        /*}*/
+
+
         /* Premium Header */
         .premium-header {
             position: fixed;
@@ -57,7 +99,7 @@
             width: 100%;
             background: rgba(15, 23, 42, 0.9);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 1000;
             padding: 1.2rem 0;
             transition: all 0.3s ease;
@@ -66,7 +108,7 @@
         .premium-header.scrolled {
             padding: 0.8rem 0;
             background: rgba(15, 23, 42, 0.95);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
         .header-content {
@@ -108,13 +150,17 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             animation: shine 3s infinite;
         }
 
         @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 100%; }
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
         }
 
         .premium-brand h1 {
@@ -181,8 +227,8 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(59,130,246,0.1);
-            border: 1px solid rgba(59,130,246,0.2);
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
             padding: 12px 24px;
             border-radius: 50px;
             margin-bottom: 2rem;
@@ -227,14 +273,14 @@
             padding: 2rem;
             background: var(--light-bg);
             border-radius: var(--radius);
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
 
         .stat-item:hover {
             transform: translateY(-5px);
-            border-color: rgba(59,130,246,0.2);
+            border-color: rgba(59, 130, 246, 0.2);
             box-shadow: var(--shadow);
         }
 
@@ -304,7 +350,7 @@
 
         .feature-card {
             background: var(--light-bg);
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: var(--radius);
             padding: 2.5rem;
             backdrop-filter: blur(10px);
@@ -330,8 +376,8 @@
 
         .feature-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(59,130,246,0.2);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(59, 130, 246, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .feature-card:hover::before {
@@ -342,7 +388,7 @@
             width: 70px;
             height: 70px;
             border-radius: 18px;
-            background: rgba(59,130,246,0.1);
+            background: rgba(59, 130, 246, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -355,7 +401,7 @@
 
         .feature-card:hover .feature-icon {
             transform: scale(1.1);
-            background: rgba(59,130,246,0.15);
+            background: rgba(59, 130, 246, 0.15);
         }
 
         .feature-icon::after {
@@ -401,7 +447,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -416,7 +462,7 @@
             height: 50px;
             border-radius: 50%;
             background: var(--light-bg);
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -427,9 +473,9 @@
         }
 
         .carousel-btn:hover {
-            background: rgba(59,130,246,0.1);
+            background: rgba(59, 130, 246, 0.1);
             color: var(--brand);
-            border-color: rgba(59,130,246,0.3);
+            border-color: rgba(59, 130, 246, 0.3);
             transform: scale(1.1);
         }
 
@@ -451,7 +497,7 @@
 
         .service-card {
             background: var(--light-bg);
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: var(--radius);
             padding: 2.5rem;
             text-align: center;
@@ -479,8 +525,8 @@
 
         .service-card:hover {
             transform: translateY(-10px) scale(1.02);
-            border-color: rgba(59,130,246,0.2);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(59, 130, 246, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .service-card:hover::before {
@@ -508,7 +554,7 @@
             width: 80px;
             height: 80px;
             border-radius: 20px;
-            background: rgba(59,130,246,0.1);
+            background: rgba(59, 130, 246, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -521,7 +567,7 @@
 
         .service-card:hover .service-icon {
             transform: scale(1.15) rotate(5deg);
-            background: rgba(59,130,246,0.15);
+            background: rgba(59, 130, 246, 0.15);
         }
 
         .service-icon::after {
@@ -575,7 +621,7 @@
         .service-features li {
             color: var(--muted);
             padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -639,7 +685,7 @@
             background: var(--light-bg);
             padding: 2rem;
             border-radius: var(--radius);
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             margin: 0 2rem;
             transition: all 0.4s ease;
             backdrop-filter: blur(10px);
@@ -661,7 +707,7 @@
 
         .timeline-content:hover {
             transform: translateY(-5px);
-            border-color: rgba(59,130,246,0.2);
+            border-color: rgba(59, 130, 246, 0.2);
             box-shadow: var(--shadow);
         }
 
@@ -674,7 +720,7 @@
             height: 60px;
             border-radius: 50%;
             background: var(--light-bg);
-            border: 2px solid rgba(59,130,246,0.3);
+            border: 2px solid rgba(59, 130, 246, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -704,15 +750,21 @@
 
         .timeline-item.visible .timeline-marker {
             border-color: var(--brand);
-            background: rgba(59,130,246,0.1);
-            box-shadow: 0 0 20px rgba(59,130,246,0.2);
+            background: rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 20px rgba(59,130,246,0.2); }
-            50% { box-shadow: 0 0 30px rgba(59,130,246,0.4); }
-            100% { box-shadow: 0 0 20px rgba(59,130,246,0.2); }
+            0% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+            }
         }
 
         .timeline-item.visible .timeline-marker::before {
@@ -721,7 +773,7 @@
 
         .timeline-item:hover .timeline-marker {
             transform: scale(1.15);
-            box-shadow: 0 0 25px rgba(59,130,246,0.5);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
         }
 
         /* Responsive */
@@ -766,7 +818,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
             z-index: -1;
         }
 
@@ -809,7 +861,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
             transition: left 0.5s;
         }
 
@@ -819,7 +871,7 @@
 
         .premium-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(59,130,246,0.4);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
         }
 
         /* Floating Action Buttons */
@@ -856,7 +908,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.5s;
         }
 
@@ -874,14 +926,14 @@
 
         .floating-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
 
         /* Footer */
         .premium-footer {
             background: var(--card);
             padding: 4rem 2rem 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             margin-top: 4rem;
         }
 
@@ -925,15 +977,19 @@
             max-width: 1200px;
             margin: 0 auto;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             text-align: center;
             color: var(--muted);
         }
 
         /* Animations */
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         .floating {
@@ -1049,7 +1105,8 @@
                     <div class="feature-icon"><i class="fas fa-bolt"></i></div>
                     <h3 class="feature-title">Lightning-Fast Development</h3>
                     <p class="feature-description">
-                        Agile methodology and modern technologies allow us to deliver working prototypes in days, not weeks.
+                        Agile methodology and modern technologies allow us to deliver working prototypes in days, not
+                        weeks.
                     </p>
                     <ul style="color: var(--muted); padding-left: 1.2rem;">
                         <li>Prototypes in 24-48 hours</li>
@@ -1342,7 +1399,7 @@
 
 <script>
     // Carousel functionality
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const track = document.getElementById('carouselTrack');
         const slides = document.querySelectorAll('.carousel-slide');
         const dotsContainer = document.getElementById('carouselDots');
@@ -1424,7 +1481,7 @@
         });
 
         // Header scroll effect
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const header = document.getElementById('header');
             if (window.scrollY > 100) {
                 header.classList.add('scrolled');
