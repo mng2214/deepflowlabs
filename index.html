@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>DeepFlow Labs — Build Better Software</title>
+    <meta name="description" content="Custom software for SMBs: web apps, automation, AI integrations."/>
+
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0b0f16;
+            --fg: #eaf1ff;
+            --muted: #94a3b8;
+            --brand: #2aa7ff;
+            --brand-2: #6bd3ff;
+            --card: #111827;
+            --radius: 18px;
+            --shadow: 0 10px 40px rgba(0,0,0,.45);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            color: var(--fg);
+            background:
+                    radial-gradient(1200px 600px at 70% -10%, rgba(42,167,255,.08), transparent 60%),
+                    radial-gradient(800px 400px at 10% 110%, rgba(107,211,255,.08), transparent 60%),
+                    var(--bg);
+            letter-spacing: .2px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px 24px;
+            display: flex;
+            min-height: 100dvh;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+            box-shadow: 0 8px 24px rgba(42,167,255,.35), inset 0 0 24px rgba(255,255,255,.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::after {
+            content: "DF";
+            font-weight: 800;
+            font-size: 14px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .brand h1 {
+            font-size: 20px;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: .4px;
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-top {
+            text-decoration: none;
+            color: var(--fg);
+            padding: 12px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,.08);
+            background: rgba(255,255,255,.02);
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-top:hover {
+            background: rgba(255,255,255,.05);
+            border-color: rgba(255,255,255,.12);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .cta-top:hover::before {
+            left: 100%;
+        }
+
+        /* Main Content */
+        main {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 32px;
+            align-items: center;
+            flex: 1;
+        }
+
+        @media (max-width: 900px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        .hero {
+            padding: 32px;
+            border-radius: var(--radius);
+            background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+            border: 1px solid rgba(255,255,255,.08);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .title {
+            font-size: clamp(32px, 4.5vw, 48px);
+            line-height: 1.05;
+            margin: 0 0 16px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            margin: 0 0 32px;
+            color: var(--muted);
+            font-size: clamp(16px, 2vw, 20px);
+            font-weight: 500;
+        }
+
+        /* Toggles */
+        .toggles {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .switch {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255,255,255,.02);
+            border: 1px solid rgba(255,255,255,.08);
+            padding: 16px 20px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .switch::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(42,167,255,0.1), rgba(107,211,255,0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .switch:hover {
+            box-shadow: 0 10px 28px rgba(42,167,255,.08), inset 0 0 0 1px rgba(255,255,255,.04);
+            transform: translateY(-2px);
+        }
+
+        .switch:hover::before {
+            opacity: 1;
+        }
+
+        .switch:active {
+            transform: translateY(0);
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .slider {
+            position: relative;
+            width: 52px;
+            height: 28px;
+            background: #4b5563;
+            border-radius: 28px;
+            transition: .28s ease;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,.35);
+        }
+
+        .slider::before {
+            content: "";
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, #fff, #e9eef8);
+            box-shadow: 0 2px 6px rgba(0,0,0,.25);
+            transition: .28s ease;
+        }
+
+        input:checked + .slider {
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+            box-shadow: inset 0 2px 6px rgba(0,0,0,.25), 0 0 16px rgba(42,167,255,.35);
+        }
+
+        input:checked + .slider::before {
+            transform: translateX(24px);
+        }
+
+        /* Selection counter */
+        .selection-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--brand), var(--brand-2));
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            appearance: none;
+            border: 0;
+            cursor: pointer;
+            padding: 14px 20px;
+            border-radius: 14px;
+            font-weight: 700;
+            letter-spacing: .4px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+            color: #0b1220;
+            box-shadow: 0 10px 28px rgba(42,167,255,.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(42,167,255,.45);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        /* pulse while disabled */
+        @keyframes softPulse {
+            0% { box-shadow: 0 10px 28px rgba(42,167,255,.35); }
+            50% { box-shadow: 0 10px 28px rgba(42,167,255,.5); }
+            100% { box-shadow: 0 10px 28px rgba(42,167,255,.35); }
+        }
+
+        .btn-primary[disabled] {
+            opacity: .6;
+            cursor: not-allowed;
+            filter: grayscale(.15);
+            animation: softPulse 2s ease-in-out infinite;
+        }
+
+        .btn-primary[disabled]:hover {
+            transform: none;
+        }
+
+        /* bounce once when enabled */
+        @keyframes popIn {
+            0% { transform: translateY(0) scale(1); }
+            40% { transform: translateY(-4px) scale(1.05); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        .btn-primary.pop {
+            animation: popIn .35s ease;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--fg);
+            border: 1px solid rgba(255,255,255,.14);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255,255,255,.05);
+            border-color: rgba(255,255,255,.2);
+            transform: translateY(-2px);
+        }
+
+        .legal {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* Panel */
+        .panel {
+            padding: 24px;
+            border-radius: var(--radius);
+            background: var(--card);
+            border: 1px solid rgba(255,255,255,.06);
+            box-shadow: var(--shadow);
+        }
+
+        .panel h3 {
+            margin: 0 0 12px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .bullets {
+            margin: 8px 0 0;
+            padding-left: 18px;
+            color: var(--muted);
+        }
+
+        .bullets li {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 24px;
+            color: var(--muted);
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,.06);
+        }
+
+        /* Animation for first-load attention */
+        @keyframes tease {
+            0%, 100% { transform: translateX(0) }
+            50% { transform: translateX(24px) }
+        }
+
+        .slider.tease::before {
+            animation: tease .9s ease-in-out 1;
+        }
+
+        /* Fade in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+        /* ===== FLOATING ACTION BUTTON ===== */
+        .floating-actions {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Responsive footer */
+        @media (max-width: 768px) {
+            .floating-actions {
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        .floating-btn.telegram {
+            background: linear-gradient(135deg, #0088cc, #00a8e8);
+        }
+
+        .floating-btn.email {
+            background: linear-gradient(135deg, #ea4335, #d93025);
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="brand fade-in">
+            <div class="logo" aria-hidden="true"></div>
+            <h1>DeepFlow Labs</h1>
+        </div>
+        <a class="cta-top fade-in delay-1" href="#contact">Get Free Consultation</a>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <h2 id="hero-title" class="title fade-in">Custom software for your business.<br>Simple. Fast. Reliable.</h2>
+            <p class="subtitle fade-in delay-1">Choose what matters most to you and see the result.</p>
+
+            <div class="selection-info">
+                <div class="hint">Pick two priorities</div>
+                <div class="legal" aria-live="polite" id="selCount">0/2 selected</div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="toggles">
+                <label class="switch fade-in delay-2">
+                    Cheap
+                    <input type="checkbox" data-key="cheap">
+                    <span class="slider"></span>
+                </label>
+                <label class="switch fade-in delay-3">
+                    Fast
+                    <input type="checkbox" data-key="fast">
+                    <span class="slider"></span>
+                </label>
+                <label class="switch fade-in delay-4">
+                    Quality
+                    <input type="checkbox" data-key="quality">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="hint">Try turning on all three and see what happens 😉</div>
+
+            <div class="actions">
+                <button id="continueBtn" class="btn btn-primary" type="button" disabled>
+                    <span>Continue</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/>
+                    </svg>
+                </button>
+                <button id="resetBtn" class="btn btn-ghost" type="button">Reset</button>
+            </div>
+        </section>
+
+        <aside class="panel fade-in delay-4">
+            <h3>What you'll see next</h3>
+            <ul class="bullets">
+                <li><strong>Fast + Cheap</strong> → intentionally rough demo (what cutting quality looks like)</li>
+                <li><strong>Cheap + Quality</strong> → great results, longer timeline</li>
+                <li><strong>Fast + Quality</strong> → premium experience (our recommended path)</li>
+            </ul>
+        </aside>
+    </main>
+    <!-- Floating Action Buttons -->
+    <div class="floating-actions">
+        <a href="https://t.me/mngartur" class="floating-btn telegram">
+            <i class="fab fa-telegram"></i>
+        </a>
+        <a href="#contacts" class="floating-btn email">
+            <i class="fas fa-envelope"></i>
+        </a>
+    </div>
+    <footer>
+        <div>© <span id="year"></span> DeepFlow Labs</div>
+        <div>Chicago, USA • hello@deepflowlabs.dev</div>
+    </footer>
+</div>
+
+<script>
+    (function(){
+        // DOM elements
+        const inputs = Array.from(document.querySelectorAll('.switch input[type=checkbox]'));
+        const sliders = Array.from(document.querySelectorAll('.switch .slider'));
+        const continueBtn = document.getElementById('continueBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const selCount = document.getElementById('selCount');
+        const progressFill = document.getElementById('progressFill');
+
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Selected options (order matters for auto-drop)
+        const selected = [];
+
+        // Update UI based on selection
+        function updateUI() {
+            const count = selected.length;
+            selCount.textContent = `${count}/2 selected`;
+
+            // Update progress bar
+            progressFill.style.width = `${(count / 2) * 100}%`;
+
+            // Update button state
+            const wasDisabled = continueBtn.disabled;
+            continueBtn.disabled = count !== 2;
+
+            // Bounce animation when enabled
+            if (wasDisabled && !continueBtn.disabled) {
+                continueBtn.classList.remove('pop');
+                void continueBtn.offsetWidth; // Trigger reflow
+                continueBtn.classList.add('pop');
+            }
+
+            // Update selection colors
+            inputs.forEach(inp => {
+                const label = inp.closest('.switch');
+                if (inp.checked) {
+                    label.style.borderColor = 'rgba(42,167,255,0.4)';
+                    label.style.background = 'rgba(42,167,255,0.05)';
+                } else {
+                    label.style.borderColor = '';
+                    label.style.background = '';
+                }
+            });
+        }
+
+        // Handle checkbox change
+        function onChange(e) {
+            const inp = e.currentTarget;
+            const key = inp.dataset.key;
+
+            if (inp.checked) {
+                if (selected.length === 2) {
+                    // Drop the oldest selection
+                    const drop = selected.shift();
+                    const dropInp = inputs.find(i => i.dataset.key === drop);
+                    if (dropInp) {
+                        dropInp.checked = false;
+                    }
+                }
+                selected.push(key);
+            } else {
+                const i = selected.indexOf(key);
+                if (i !== -1) selected.splice(i, 1);
+            }
+
+            updateUI();
+        }
+
+        // Route to appropriate page
+        function route() {
+            const set = new Set(selected);
+
+            if (set.size !== 2) {
+                return;
+            }
+
+            // Determine target page
+            let target = '/';
+            if (set.has('fast') && set.has('cheap')) {
+                target = '/exp/fast-cheap.html';
+            } else if (set.has('cheap') && set.has('quality')) {
+                target = '/exp/cheap-quality.html';
+            } else if (set.has('fast') && set.has('quality')) {
+                target = '/exp/fast-quality.html';
+            } else {
+                return;
+            }
+
+            // Add loading state to button
+            continueBtn.disabled = true;
+            continueBtn.innerHTML = '<span>Loading...</span>';
+
+            // Simulate API call or navigation
+            setTimeout(() => {
+                window.location.href = target;
+            }, 800);
+        }
+
+        // Reset all selections
+        function resetAll() {
+            selected.splice(0, selected.length);
+            inputs.forEach(i => i.checked = false);
+            updateUI();
+        }
+
+        // First load tease animation
+        function teaseSequence() {
+            sliders.forEach((s, idx) => {
+                setTimeout(() => {
+                    s.classList.add('tease');
+                    setTimeout(() => s.classList.remove('tease'), 900);
+                }, idx * 180);
+            });
+        }
+
+        // Initialize
+        function init() {
+            // Event listeners
+            inputs.forEach(inp => inp.addEventListener('change', onChange));
+            continueBtn.addEventListener('click', route);
+            resetBtn.addEventListener('click', resetAll);
+
+            // Tease animation
+            setTimeout(teaseSequence, 500);
+
+            // Initial UI update
+            updateUI();
+        }
+
+        // Start when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+</script>
+</body>
+</html>
