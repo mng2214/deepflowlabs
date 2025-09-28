@@ -166,7 +166,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 8rem 2rem 4rem;
+            padding: 9rem 2rem 4rem;
             position: relative;
             text-align: center;
         }
@@ -240,11 +240,11 @@
 
         .stat-number {
             font-size: 2.5rem;
-            font-weight: 800;
+            font-weight: 600;
             background: var(--gradient-text);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
         }
 
         .stat-label {
@@ -253,11 +253,13 @@
             font-weight: 600;
         }
 
-        /* Features Grid */
+        /* Features Section - Carousel */
         .features-section {
             padding: 6rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            overflow: hidden;
         }
 
         .section-title {
@@ -280,11 +282,24 @@
             margin-right: auto;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: var(--radius);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
         }
 
         .feature-card {
@@ -296,6 +311,9 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: var(--shadow);
         }
 
         .feature-card::before {
@@ -313,7 +331,7 @@
         .feature-card:hover {
             transform: translateY(-8px);
             border-color: rgba(59,130,246,0.2);
-            box-shadow: var(--shadow);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
         .feature-card:hover::before {
@@ -366,7 +384,56 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Services Section */
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--brand);
+            transform: scale(1.2);
+        }
+
+        .carousel-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--light-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--muted);
+            font-size: 1.2rem;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(59,130,246,0.1);
+            color: var(--brand);
+            border-color: rgba(59,130,246,0.3);
+            transform: scale(1.1);
+        }
+
+        /* Services Section - Interactive Grid */
         .services-section {
             padding: 6rem 2rem;
             background: rgba(30, 41, 59, 0.3);
@@ -388,14 +455,53 @@
             border-radius: var(--radius);
             padding: 2.5rem;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px) scale(1.02);
             border-color: rgba(59,130,246,0.2);
-            box-shadow: var(--shadow);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .service-card:hover::after {
+            opacity: 0.05;
         }
 
         .service-icon {
@@ -410,11 +516,11 @@
             font-size: 2rem;
             position: relative;
             color: var(--brand);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .service-card:hover .service-icon {
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(5deg);
             background: rgba(59,130,246,0.15);
         }
 
@@ -425,7 +531,7 @@
             border-radius: 22px;
             background: var(--gradient);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
             z-index: -1;
         }
 
@@ -437,17 +543,33 @@
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover .service-title {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .service-description {
             color: var(--muted);
             margin-bottom: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover .service-description {
+            color: var(--fg);
         }
 
         .service-features {
             list-style: none;
             padding: 0;
             margin: 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
 
         .service-features li {
@@ -457,17 +579,23 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .service-features li:hover {
             color: var(--fg);
+            transform: translateX(5px);
         }
 
         .service-features li:before {
             content: '✓';
             color: var(--accent);
             font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .service-features li:hover:before {
+            transform: scale(1.2);
         }
 
         .service-features li:last-child {
@@ -611,6 +739,10 @@
                 width: 50px;
                 height: 50px;
                 font-size: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -830,10 +962,6 @@
                 gap: 1.5rem;
             }
 
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
             .hero-stats {
                 grid-template-columns: 1fr;
             }
@@ -847,6 +975,12 @@
                 width: 50px;
                 height: 50px;
                 font-size: 1.2rem;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -895,148 +1029,202 @@
                 <div class="stat-label">System Reliability</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">24/7</div>
+                <div class="stat-number">Extended</div>
                 <div class="stat-label">Support & Monitoring</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Features Section -->
+<!-- Features Section - Carousel -->
 <section class="features-section" id="features">
     <h2 class="section-title fade-in">Why Choose Us</h2>
     <p class="section-subtitle fade-in">The perfect combination of development speed and uncompromising quality</p>
 
-    <div class="features-grid">
-        <div class="feature-card fade-in">
-            <div class="feature-icon">
-                <i class="fas fa-bolt"></i>
+    <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
+            <!-- Slide 1 -->
+            <div class="carousel-slide">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h3 class="feature-title">Lightning-Fast Development</h3>
+                    <p class="feature-description">
+                        Agile methodology and modern technologies allow us to deliver working prototypes in days, not weeks.
+                    </p>
+                    <ul style="color: var(--muted); padding-left: 1.2rem;">
+                        <li>Prototypes in 24-48 hours</li>
+                        <li>Bi-weekly releases</li>
+                        <li>Continuous integration</li>
+                    </ul>
+                </div>
             </div>
-            <h3 class="feature-title">Lightning-Fast Development</h3>
-            <p class="feature-description">
-                Agile methodology and modern technologies allow us to deliver working prototypes in days, not weeks.
-            </p>
-            <ul style="color: var(--muted); padding-left: 1.2rem;">
-                <li>Prototypes in 24-48 hours</li>
-                <li>Bi-weekly releases</li>
-                <li>Continuous integration</li>
-            </ul>
+
+            <!-- Slide 2 -->
+            <div class="carousel-slide">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i class="fas fa-code"></i></div>
+                    <h3 class="feature-title">Premium Code Quality</h3>
+                    <p class="feature-description">
+                        Clean architecture, automated testing, and code review ensure reliability and scalability.
+                    </p>
+                    <ul style="color: var(--muted); padding-left: 1.2rem;">
+                        <li>100% test coverage</li>
+                        <li>Expert code review</li>
+                        <li>Scalable architecture</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-slide">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="feature-title">Code Security</h3>
+                    <p class="feature-description">
+                        Security is baked into our development process to protect your business and customers.
+                    </p>
+                    <ul style="color: var(--muted); padding-left: 1.2rem;">
+                        <li>OWASP best practices</li>
+                        <li>Secure authentication & encryption</li>
+                        <li>Regular security audits</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="carousel-slide">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                    <h3 class="feature-title">Flawless UI/UX</h3>
+                    <p class="feature-description">
+                        Intuitive interfaces that users love and that increase conversion rates.
+                    </p>
+                    <ul style="color: var(--muted); padding-left: 1.2rem;">
+                        <li>User-centered design</li>
+                        <li>Deep behavior analytics</li>
+                        <li>WCAG compliance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="carousel-slide">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <h3 class="feature-title">High Performance</h3>
+                    <p class="feature-description">
+                        Applications that run fast even under high loads and on low-end devices.
+                    </p>
+                    <ul style="color: var(--muted); padding-left: 1.2rem;">
+                        <li>90+ PageSpeed scores</li>
+                        <li>Global CDN</li>
+                        <li>Optimized assets</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div class="feature-card fade-in">
-            <div class="feature-icon">
-                <i class="fas fa-code"></i>
-            </div>
-            <h3 class="feature-title">Premium Code Quality</h3>
-            <p class="feature-description">
-                Clean architecture, automated testing, and code review ensure reliability and scalability.
-            </p>
-            <ul style="color: var(--muted); padding-left: 1.2rem;">
-                <li>100% test coverage</li>
-                <li>Expert code review</li>
-                <li>Scalable architecture</li>
-            </ul>
-        </div>
-
-        <div class="feature-card fade-in">
-            <div class="feature-icon">
-                <i class="fas fa-palette"></i>
-            </div>
-            <h3 class="feature-title">Flawless UI/UX</h3>
-            <p class="feature-description">
-                Intuitive interfaces that users love and that increase conversion rates.
-            </p>
-            <ul style="color: var(--muted); padding-left: 1.2rem;">
-                <li>User-centered design</li>
-                <li>Deep behavior analytics</li>
-                <li>WCAG compliance</li>
-            </ul>
-        </div>
-
-        <div class="feature-card fade-in">
-            <div class="feature-icon">
-                <i class="fas fa-tachometer-alt"></i>
-            </div>
-            <h3 class="feature-title">High Performance</h3>
-            <p class="feature-description">
-                Applications that run fast even under high loads and on low-end devices.
-            </p>
-            <ul style="color: var(--muted); padding-left: 1.2rem;">
-                <li>90+ PageSpeed scores</li>
-                <li>Global CDN</li>
-                <li>Mobile optimization</li>
-            </ul>
+        <div class="carousel-nav">
+            <button class="carousel-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <div class="carousel-dots" id="carouselDots"></div>
+            <button class="carousel-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
         </div>
     </div>
 </section>
 
-<!-- Services Section -->
+<!-- Services Section - Interactive Grid -->
 <section class="services-section" id="services">
     <h2 class="section-title fade-in">Our Services</h2>
-    <p class="section-subtitle fade-in">Comprehensive IT solutions for your business growth</p>
+    <p class="section-subtitle fade-in">Comprehensive solutions for your digital transformation</p>
 
     <div class="services-grid">
+        <!-- Service 1 -->
         <div class="service-card fade-in">
-            <div class="service-icon">
-                <i class="fas fa-robot"></i>
-            </div>
-            <h3 class="service-title">AI Integration</h3>
+            <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h3 class="service-title">Mobile Development</h3>
             <p class="service-description">
-                Implementing artificial intelligence to automate and optimize business processes.
+                Native and cross-platform mobile applications for iOS and Android.
             </p>
             <ul class="service-features">
-                <li>Chatbots & virtual assistants</li>
-                <li>Data analysis & forecasting</li>
-                <li>Personalized recommendations</li>
-                <li>Computer vision solutions</li>
+                <li>iOS & Android Apps</li>
+                <li>React Native & Flutter</li>
+                <li>App Store Optimization</li>
+                <li>Push Notifications</li>
             </ul>
         </div>
 
+        <!-- Service 2 -->
         <div class="service-card fade-in">
-            <div class="service-icon">
-                <i class="fas fa-cogs"></i>
-            </div>
-            <h3 class="service-title">Business Automation</h3>
+            <div class="service-icon"><i class="fas fa-globe"></i></div>
+            <h3 class="service-title">Web Development</h3>
             <p class="service-description">
-                Automating routine operations and creating efficient workflows.
+                Responsive websites and web applications with modern technologies.
             </p>
             <ul class="service-features">
-                <li>CRM/ERP systems</li>
-                <li>Report automation</li>
-                <li>Workflow optimization</li>
-                <li>API integration</li>
+                <li>React & Vue.js</li>
+                <li>Node.js & Python</li>
+                <li>Progressive Web Apps</li>
+                <li>E-commerce Solutions</li>
             </ul>
         </div>
 
+        <!-- Service 3 -->
         <div class="service-card fade-in">
-            <div class="service-icon">
-                <i class="fas fa-globe"></i>
-            </div>
-            <h3 class="service-title">Web Applications</h3>
-            <p class="service-description">
-                Creating modern web applications to solve specific business challenges.
-            </p>
-            <ul class="service-features">
-                <li>Corporate portals</li>
-                <li>Management systems</li>
-                <li>Analytics dashboards</li>
-                <li>PWA applications</li>
-            </ul>
-        </div>
-
-        <div class="service-card fade-in">
-            <div class="service-icon">
-                <i class="fas fa-cloud"></i>
-            </div>
+            <div class="service-icon"><i class="fas fa-cloud"></i></div>
             <h3 class="service-title">Cloud Solutions</h3>
             <p class="service-description">
-                Cloud infrastructure and integrations to scale your business.
+                Scalable cloud infrastructure and deployment solutions.
             </p>
             <ul class="service-features">
-                <li>Cloud migration</li>
+                <li>AWS & Azure</li>
                 <li>DevOps & CI/CD</li>
-                <li>Data security</li>
-                <li>24/7 monitoring</li>
+                <li>Microservices</li>
+                <li>Containerization</li>
+            </ul>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card fade-in">
+            <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+            <h3 class="service-title">Digital Marketing</h3>
+            <p class="service-description">
+                Data-driven marketing strategies to grow your online presence.
+            </p>
+            <ul class="service-features">
+                <li>SEO Optimization</li>
+                <li>Social Media Marketing</li>
+                <li>Content Strategy</li>
+                <li>Analytics & Reporting</li>
+            </ul>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="service-card fade-in">
+            <div class="service-icon"><i class="fas fa-cogs"></i></div>
+            <h3 class="service-title">System Integration</h3>
+            <p class="service-description">
+                Connecting disparate systems to work together seamlessly.
+            </p>
+            <ul class="service-features">
+                <li>API Development</li>
+                <li>Legacy System Modernization</li>
+                <li>Third-party Integrations</li>
+                <li>Data Migration</li>
+            </ul>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="service-card fade-in">
+            <div class="service-icon"><i class="fas fa-headset"></i></div>
+            <h3 class="service-title">Support & Maintenance</h3>
+            <p class="service-description">
+                Ongoing support to keep your systems running smoothly.
+            </p>
+            <ul class="service-features">
+                <li>24/7 Monitoring</li>
+                <li>Performance Optimization</li>
+                <li>Security Updates</li>
+                <li>Technical Support</li>
             </ul>
         </div>
     </div>
@@ -1044,70 +1232,73 @@
 
 <!-- Process Timeline -->
 <section class="process-section" id="process">
-    <h2 class="section-title fade-in">Development Process</h2>
-    <p class="section-subtitle fade-in">Transparent and efficient path from idea to implementation</p>
+    <h2 class="section-title fade-in">Our Process</h2>
+    <p class="section-subtitle fade-in">Transparent workflow from idea to implementation</p>
 
     <div class="timeline">
+        <!-- Step 1 -->
         <div class="timeline-item">
             <div class="timeline-marker">1</div>
             <div class="timeline-content">
-                <h3>Discovery & Analysis</h3>
-                <p>Deep dive into business processes, requirements analysis, and defining key success metrics.</p>
+                <h3>Discovery & Planning</h3>
+                <p>We analyze your requirements, define goals, and create a detailed project roadmap.</p>
             </div>
         </div>
 
+        <!-- Step 2 -->
         <div class="timeline-item">
             <div class="timeline-marker">2</div>
             <div class="timeline-content">
-                <h3>Architecture Design</h3>
-                <p>Creating scalable and maintainable architecture with future growth in mind.</p>
+                <h3>Design & Prototyping</h3>
+                <p>We create wireframes, design mockups, and interactive prototypes for your approval.</p>
             </div>
         </div>
 
+        <!-- Step 3 -->
         <div class="timeline-item">
             <div class="timeline-marker">3</div>
             <div class="timeline-content">
-                <h3>Rapid Development</h3>
-                <p>Agile development with continuous integration, regular demos, and fast iterations.</p>
+                <h3>Development & Testing</h3>
+                <p>Our team builds your solution with regular updates and comprehensive testing.</p>
             </div>
         </div>
 
+        <!-- Step 4 -->
         <div class="timeline-item">
             <div class="timeline-marker">4</div>
             <div class="timeline-content">
-                <h3>Quality Assurance</h3>
-                <p>Comprehensive testing: unit, integration, performance, and user acceptance testing.</p>
+                <h3>Deployment & Launch</h3>
+                <p>We deploy your solution to production and ensure everything runs smoothly.</p>
             </div>
         </div>
 
+        <!-- Step 5 -->
         <div class="timeline-item">
             <div class="timeline-marker">5</div>
             <div class="timeline-content">
-                <h3>Launch & Support</h3>
-                <p>Smooth deployment with 24/7 support, monitoring, and continuous optimization.</p>
+                <h3>Support & Optimization</h3>
+                <p>We provide ongoing support and optimization to keep your solution performing.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="cta-section fade-in" id="contact">
-    <h2 class="cta-title">Ready to Start Your Project?</h2>
-    <p class="cta-subtitle">
-        Submit your request and get a free consultation with cost and timeline estimation for your project
-    </p>
-    <button class="premium-btn" onclick="startProject()">
-        <span>Start Collaboration</span>
+<section class="cta-section" id="contact">
+    <h2 class="cta-title fade-in">Ready to Start Your Project?</h2>
+    <p class="cta-subtitle fade-in">Let's discuss how we can help bring your ideas to life with speed and quality</p>
+    <button class="premium-btn" onclick="openContactModal()">
+        <span>Get Started Today</span>
         <i class="fas fa-rocket"></i>
     </button>
 </section>
 
 <!-- Floating Action Buttons -->
 <div class="floating-actions">
-    <a href="https://t.me/mngartur" class="floating-btn telegram">
+    <a href="https://t.me/deepflow_labs" class="floating-btn telegram" target="_blank">
         <i class="fab fa-telegram"></i>
     </a>
-    <a href="mailto:hello@deepflowlabs.dev" class="floating-btn email">
+    <a href="mailto:contact@deepflowlabs.com" class="floating-btn email">
         <i class="fas fa-envelope"></i>
     </a>
 </div>
@@ -1117,98 +1308,143 @@
     <div class="footer-content">
         <div class="footer-column">
             <h3>DeepFlow Labs</h3>
-            <p style="color: var(--muted); margin-bottom: 1.5rem;">
-                Creating custom IT solutions for small and medium businesses.
-                Fast. Quality. Reliable.
-            </p>
-            <div style="color: var(--muted);">
-                <p><i class="fas fa-map-marker-alt"></i> Chicago, USA</p>
-                <p><i class="fas fa-envelope"></i> hello@deepflowlabs.dev</p>
-            </div>
+            <p style="color: var(--muted);">Premium software development with perfect balance of speed and quality.</p>
         </div>
         <div class="footer-column">
             <h3>Services</h3>
             <ul class="footer-links">
-                <li><a href="#services">AI Integration</a></li>
-                <li><a href="#services">Business Automation</a></li>
-                <li><a href="#services">Web Applications</a></li>
+                <li><a href="#services">Mobile Development</a></li>
+                <li><a href="#services">Web Development</a></li>
                 <li><a href="#services">Cloud Solutions</a></li>
+                <li><a href="#services">Digital Marketing</a></li>
             </ul>
         </div>
         <div class="footer-column">
             <h3>Company</h3>
             <ul class="footer-links">
-                <li><a href="#features">About Us</a></li>
-                <li><a href="#process">Process</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#" onclick="startProject()">Start Project</a></li>
+                <li><a href="#features">Why Choose Us</a></li>
+                <li><a href="#process">Our Process</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Connect</h3>
+            <ul class="footer-links">
+                <li><a href="https://t.me/deepflow_labs" target="_blank">Telegram</a></li>
+                <li><a href="mailto:contact@deepflowlabs.com">Email</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>© 2024 DeepFlow Labs. Premium Fast & Quality Experience.</p>
+        <p>&copy; 2023 DeepFlow Labs. All rights reserved.</p>
     </div>
 </footer>
 
 <script>
-    // Scroll animations
-    function checkScroll() {
-        const elements = document.querySelectorAll('.fade-in');
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementVisible = 150;
-            if (elementTop < window.innerHeight - elementVisible) {
-                element.classList.add('visible');
-            }
-        });
+    // Carousel functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const track = document.getElementById('carouselTrack');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dotsContainer = document.getElementById('carouselDots');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
 
-        // Timeline animations
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        timelineItems.forEach((item, index) => {
-            const itemTop = item.getBoundingClientRect().top;
-            const itemVisible = 100;
+        let currentIndex = 0;
+        const totalSlides = slides.length;
 
-            if (itemTop < window.innerHeight - itemVisible) {
-                setTimeout(() => {
-                    item.classList.add('visible');
-                }, index * 200);
-            }
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('carousel-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        // Update carousel position
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+            // Update active dot
+            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Go to specific slide
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        // Next slide
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        // Previous slide
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Auto-advance carousel
+        setInterval(nextSlide, 5000);
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+
+                    // For timeline items
+                    if (entry.target.classList.contains('timeline-item')) {
+                        const delay = Array.from(entry.target.parentNode.children).indexOf(entry.target) * 200;
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, delay);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.fade-in, .timeline-item').forEach(el => {
+            observer.observe(el);
         });
 
         // Header scroll effect
-        const header = document.getElementById('header');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    }
-
-    function scrollToFeatures() {
-        document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function startProject() {
-        window.location.href = 'https://t.me/mngartur';
-    }
-
-    // Initialize
-    window.addEventListener('scroll', checkScroll);
-    window.addEventListener('load', checkScroll);
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
         });
     });
+
+    // Scroll to features
+    function scrollToFeatures() {
+        document.getElementById('features').scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+
+    // Open contact modal (placeholder)
+    function openContactModal() {
+        alert('Thank you for your interest! Please contact us via Telegram or Email to discuss your project.');
+    }
 </script>
 </body>
 </html>
