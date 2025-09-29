@@ -115,6 +115,7 @@
 /* Mobile menu styles */
 .mobile-menu {
     position: fixed;
+    inset: 0;
     top: 0;
     left: -100%;
     width: 100%;
@@ -126,6 +127,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: auto;
 }
 
 .mobile-menu-close {
