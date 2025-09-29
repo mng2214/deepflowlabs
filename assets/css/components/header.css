@@ -111,3 +111,114 @@
 .nav-link:hover::after {
     width: 100%;
 }
+
+/* Mobile menu styles */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg-primary);
+    z-index: 999;
+    transition: left var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-menu-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.mobile-nav-links {
+    font-size: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+}
+
+.mobile-nav-links a {
+    font-size: 1.75rem; /* ~24px */
+}
+
+/* Кнопка-бургер (скрыта на десктопе) */
+.hamburger {
+    display: none;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.2));
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-direction: column;
+    transition: background .2s ease, border-color .2s ease;
+}
+
+.hamburger span {
+    width: 22px;
+    height: 2px;
+    background: var(--text, #fff);
+    display: block;
+    transition: transform .25s ease, opacity .25s ease;
+}
+
+/* Анимация в состоянии open (крестик) */
+.hamburger.open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Мобильное меню: состояние open */
+.mobile-menu {
+    left: -100%;
+}
+
+.mobile-menu.open {
+    left: 0;
+}
+
+/* Показать бургер и скрыть .nav-links на мобильных */
+@media (max-width: 900px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hamburger {
+        display: inline-flex;
+    }
+}
+
+/* Фон и цвета по умолчанию, если переменные не заданы */
+:root {
+    --bg-primary: #0f131a;
+    --text-primary: #fff;
+}
+
+.mobile-menu {
+    background: var(--bg-primary);
+}
+
+.mobile-menu-close {
+    color: var(--text-primary);
+}
