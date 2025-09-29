@@ -16,3 +16,15 @@
 @import url('components/toast.css');
 @import url('components/sections.css');
 
+html, body, * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    user-select: text;
+}
