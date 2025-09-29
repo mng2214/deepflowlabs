@@ -1,4 +1,3 @@
-// Главная кнопка "Get Started Today" — как у тебя, с GA и открытием Telegram
 window.startInTelegram = function () {
     if (window.gtag) {
         gtag('event', 'cta_click', {

@@ -1,4 +1,3 @@
-// CAPTCHA -> валидация с подсветкой -> overlay loading -> Formspree -> GA -> overlay success/error -> reset/close
 document.addEventListener('DOMContentLoaded', function() {
     const modal         = document.getElementById('contactModal');
     const closeModalBtn = document.querySelector('.close-modal');
@@ -8,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const captcha = window.initCaptcha();
 
-    // открыть/закрыть модалку
     function openModal() {
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
@@ -23,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('click', e => { if (e.target === modal) closeModal(); });
     window.openContactModal = openModal;
 
-    // helpers для ошибок
     function clearErrors() {
         contactForm.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
         contactForm.querySelectorAll('.error-text').forEach(el => el.remove());
@@ -31,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function markError(input, msg) {
         if (!input) return;
         input.classList.add('input-error');
-        // если уже есть подпись — не дублируем
         if (!input.nextElementSibling || !input.nextElementSibling.classList.contains('error-text')) {
             const small = document.createElement('div');
             small.className = 'error-text';
@@ -39,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
             input.parentNode.appendChild(small);
         }
     }
-    // снимать ошибку по вводу
     contactForm?.querySelectorAll('input, textarea').forEach(el => {
         el.addEventListener('input', () => {
             el.classList.remove('input-error');
@@ -53,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || '').trim());
     }
 
-    // сабмит
     contactForm?.addEventListener('submit', async function(e) {
         e.preventDefault();
         clearErrors();
@@ -65,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const project = formData.get('project');
         const captchaInput = document.getElementById('captchaInput').value;
 
-        // валидация полей с подсветкой (вместо alert)
         let hasError = false;
         if (!name)    { markError(document.getElementById('name'), 'Enter your name'); hasError = true; }
         if (!email)   { markError(document.getElementById('email'), 'Enter your email'); hasError = true; }
@@ -80,10 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (hasError) return;
 
-        // лог как раньше
         console.log('Form submitted:', { name, email, phone, project });
 
-        // кнопка: лоадер
         const submitBtn   = contactForm.querySelector('button[type="submit"]');
         const prevBtnHtml = submitBtn ? submitBtn.innerHTML : null;
         if (submitBtn) {
@@ -91,10 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.innerHTML = '<span>Sending…</span><i class="fas fa-spinner fa-spin" style="margin-left:8px"></i>';
         }
 
-        // Глобальный overlay — loading
         window.showOverlay && showOverlay('loading', 'Sending…');
 
-        // отправка на Formspree
         let sendOk = false;
         try {
             const res = await fetch(FORMSPREE_ENDPOINT, {
@@ -108,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Network error:', err);
         }
 
-        // GA
         if (window.gtag) {
             if (sendOk) {
                 gtag('event', 'lead', { event_category: 'form', event_label: 'contact_form', value: 1 });
@@ -117,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // визуальная обратная связь
         if (sendOk) {
             showOverlay('success', 'All set! Sent ✔');
             setTimeout(() => {

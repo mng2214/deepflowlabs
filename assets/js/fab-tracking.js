@@ -1,4 +1,3 @@
-// Трекинг плавающих кнопок (Telegram/Email) внизу
 document.addEventListener('DOMContentLoaded', function () {
     const fabTg   = document.querySelector('.floating-btn.telegram');
     const fabMail = document.querySelector('.floating-btn.email');

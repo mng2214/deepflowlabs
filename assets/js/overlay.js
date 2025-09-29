@@ -1,13 +1,11 @@
-// === Screen overlay with blur + loader/success/error ===
-// CSS-in-JS: добавим стили один раз
 (function initOverlayStyles(){
     const css = `
-  :root { --brand: #0ea5e9; /* фирменный цвет — поменяй при желании */ }
+  :root { --brand: #0ea5e9;
 
   #screen-blocker {
     position: fixed; inset: 0; display: none;
     align-items: center; justify-content: center;
-    background: rgba(3, 7, 18, 0.35); /* полупрозрачный фон */
+    background: rgba(3, 7, 18, 0.35);
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     z-index: 4000; pointer-events: all;
   }
@@ -48,9 +46,9 @@
   height: 24px;
   border-right: 3px solid var(--brand);
   border-bottom: 3px solid var(--brand);
-  transform: rotate(45deg);  /* рисуем галочку */
-  transform-origin: center;  /* вращаем вокруг центра */
-  /* НИКАКИХ top/left — блок уже по центру через flex */
+  transform: rotate(45deg);
+  transform-origin: center;
+
 }
 
   .checkmark.show { opacity:1; transform: scale(1); }
@@ -66,14 +64,12 @@
   .cross:before{ transform: rotate(45deg); }
   .cross:after { transform: rotate(-45deg); }
 
-  .overlay-text { font-weight:600; letter-spacing:.2px; }
-  `;
+  .overlay-text { font-weight:600; letter-spacing:.2px; }`;
     const style = document.createElement('style');
     style.textContent = css;
     document.head.appendChild(style);
 })();
 
-// Создаем DOM оверлея один раз
 (function initOverlayDom(){
     if (document.getElementById('screen-blocker')) return;
     const root = document.createElement('div');
@@ -121,7 +117,6 @@ window.showOverlay = function(state='loading', text='Sending…') {
     label.textContent = text;
 
     blocker.classList.add('show');
-    // небольшая задержка, чтобы анимация «въезда» отработала
     requestAnimationFrame(() => card.classList.add('in'));
     if (state === 'success') requestAnimationFrame(() => icon.classList.add('show'));
 
@@ -136,5 +131,5 @@ window.hideOverlay = function() {
     setTimeout(() => {
         blocker.classList.remove('show');
         setScrollBlocked(false);
-    }, 200); // совпадает с transition overlay-card
+    }, 200);
 };

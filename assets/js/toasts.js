@@ -1,4 +1,3 @@
-// Мини-тост (на странице должен быть <div id="toast"> — он у тебя уже есть)
 window.showToast = function(message, type='success', timeout=2800) {
     const el = document.getElementById('toast');
     if (!el) return;

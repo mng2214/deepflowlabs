@@ -1,4 +1,3 @@
-// Карусель (как в твоём файле)
 document.addEventListener('DOMContentLoaded', function () {
     const track        = document.getElementById('carouselTrack');
     const slides       = document.querySelectorAll('.carousel-slide');
@@ -12,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const totalSlides = slides.length;
     const slidesPerView = 3;
 
-    // Точки
     for (let i = 0; i < Math.ceil(totalSlides / slidesPerView); i++) {
         const dot = document.createElement('div');
         dot.classList.add('carousel-dot');
