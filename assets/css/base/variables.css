@@ -1,0 +1,14 @@
+:root {
+    --bg: #0a0f1c;
+    --fg: #ffffff;
+    --muted: #a0aec0;
+    --brand: #6366f1;
+    --brand-2: #8b5cf6;
+    --accent: #06d6a0;
+    --card: #1a1f2e;
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(0,0,0,0.3);
+    --gradient: linear-gradient(135deg, var(--brand), var(--brand-2), var(--accent));
+    --gradient-text: linear-gradient(135deg, var(--brand), var(--accent));
+    --light-bg: rgba(255,255,255,0.08);
+}
