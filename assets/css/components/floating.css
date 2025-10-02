@@ -51,3 +51,7 @@
     transform: translateY(-3px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
+
+.floating-btn.whatsapp {
+    background: linear-gradient(135deg, #25D366, #128C7E); /* WhatsApp green */
+}
